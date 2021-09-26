@@ -1,0 +1,202 @@
+{
+  "version": 2,
+  "projects": {
+    "boilerplate": {
+      "root": "apps/boilerplate",
+      "sourceRoot": "apps/boilerplate/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/boilerplate",
+            "index": "apps/boilerplate/src/index.html",
+            "main": "apps/boilerplate/src/main.tsx",
+            "polyfills": "apps/boilerplate/src/polyfills.ts",
+            "tsConfig": "apps/boilerplate/tsconfig.app.json",
+            "assets": [
+              "apps/boilerplate/src/favicon.ico",
+              "apps/boilerplate/src/assets"
+            ],
+            "styles": ["apps/boilerplate/src/styles.scss"],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/boilerplate/src/environments/environment.ts",
+                  "with": "apps/boilerplate/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "boilerplate:build",
+            "hmr": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "boilerplate:build:production",
+              "hmr": false
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/boilerplate/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/boilerplate"],
+          "options": {
+            "jestConfig": "apps/boilerplate/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "boilerplate-backend": {
+      "root": "apps/boilerplate-backend",
+      "sourceRoot": "apps/boilerplate-backend/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/boilerplate-backend",
+            "main": "apps/boilerplate-backend/src/main.ts",
+            "tsConfig": "apps/boilerplate-backend/tsconfig.app.json",
+            "assets": ["apps/boilerplate-backend/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/boilerplate-backend/src/environments/environment.ts",
+                  "with": "apps/boilerplate-backend/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "boilerplate-backend:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/boilerplate-backend/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/boilerplate-backend"],
+          "options": {
+            "jestConfig": "apps/boilerplate-backend/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "boilerplate-e2e": {
+      "root": "apps/boilerplate-e2e",
+      "sourceRoot": "apps/boilerplate-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/boilerplate-e2e/cypress.json",
+            "devServerTarget": "boilerplate:serve",
+            "tsConfig": "apps/boilerplate-e2e/tsconfig.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "boilerplate:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/boilerplate-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "globals": {
+      "root": "libs/globals",
+      "sourceRoot": "libs/globals/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/globals/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/globals"],
+          "options": {
+            "jestConfig": "libs/globals/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/react"
+  },
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "style": "scss",
+        "linter": "eslint",
+        "babel": true
+      },
+      "component": {
+        "style": "scss"
+      },
+      "library": {
+        "style": "scss",
+        "linter": "eslint"
+      }
+    }
+  },
+  "defaultProject": "boilerplate"
+}

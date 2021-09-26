@@ -1,0 +1,6 @@
+{
+  "watch": ["apps/boilerplate-backend/src"],
+  "ext": "ts",
+  "ignore": ["apps/boilerplate-backend/src/**/*.spec.ts"],
+  "exec": "ts-node -P tsconfig.api.json -r tsconfig-paths/register apps/boilerplate-backend/src/main.ts"
+}
