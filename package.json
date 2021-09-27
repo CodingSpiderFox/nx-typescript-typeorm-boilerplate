@@ -8,6 +8,7 @@
     "prepare": "husky install",
     "typeorm:cli": "ts-node ./node_modules/typeorm/cli -f ormconfig.local.json",
     "migration:create": "ts-node --transpile-only ./node_modules/typeorm/cli.js migration:create -f ormconfig.local.json",
+    "migration:generate": "ts-node --transpile-only ./node_modules/typeorm/cli.js migration:generate -f ormconfig.local.json",
     "migration:run": "ts-node --transpile-only ./node_modules/typeorm/cli.js migration:run -f ormconfig.local.json"
   },
   "private": true,
